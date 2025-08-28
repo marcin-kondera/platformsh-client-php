@@ -323,9 +323,10 @@ class PlatformClient
     /**
      * Get a subscription by its ID.
      */
-    public function getSubscription(int|string $id): Subscription|false
+    public function getSubscription(string $organizationId, int|string $id): Subscription|false
     {
-        $url = $this->apiUrl() . '/subscriptions';
+        $url = \sprintf('%s/organizations/%s/subscriptions/', $this->apiUrl(), $organizationId);
+        
         return Subscription::get($id, $url, $this->connector->getClient());
     }
 
